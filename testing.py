@@ -50,7 +50,4 @@ plt.xlabel("year")
 plt.ylabel("Population Growth")
 plt.show()
 
-# test 
-###
-
-# 
+x = "Jan ist spitze"
