@@ -102,12 +102,11 @@ plot.df3$Population <- as.factor(c(rep("gesamte Population",length(seq)),rep("Mi
 plot.df3$seq <- rep(seq,4)
 
 
-
 ggplot(plot.df1, aes(x = seq, y = wohnk))+
   geom_line(aes(color = Population), size = 2)+
   xlab("Euro weniger pro Monat") +
   ylab("Wohnbelastungsquote (bruttokalt) in %") +
-  ggtitle("Corona-Szenarien: Bruttokalte Wohnbelastungsquote von Mietern und Eigentümern") +
+  ggtitle("") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5)) 
 
@@ -121,7 +120,7 @@ ggplot(plot.df2, aes(x = seq, y = wohnk))+
   geom_line(aes(color = Population), size = 2)+
   xlab("Euro weniger pro Monat") +
   ylab("Wohnbelastungsquote in %") +
-  ggtitle("Corona-Szenarien: Gesamte Wohnbelastungsquote von \n Mietern und Eigentümern ohne Notfallrücklagen") +
+  ggtitle("") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5)) 
   
@@ -133,7 +132,7 @@ ggplot(plot.df3, aes(x = seq, y = wohnk))+
   geom_line(aes(color = Population), size = 2)+
   xlab("Euro weniger pro Monat") +
   ylab("Wohnbelastungsquote in %") +
-  ggtitle("Corona-Szenarien: Gesamte Wohnbelastungsquote von \n Mietern und Eigentümern ohne Notfallrücklagen") +
+  ggtitle("") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5)) 
 
