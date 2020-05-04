@@ -3,8 +3,8 @@ rm(list = ls())
 source("packages.R")
 
 datapath <- "H:/Miete und Energie/Temp/"
-
-data <- import(paste(datapath, "temp2.dta", sep = "/"))
+datapath_ho <- "/Users/kgoebler/Desktop/Miete und Energie Projekt/temp/"
+data <- import(paste(datapath_ho, "temp2.dta", sep = "/"))
 
 data <- filter(data, hhnet_initial > 0 & !is.na(hhnet_initial)) #& notrücklagen == 0)
 
