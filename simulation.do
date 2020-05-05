@@ -7,7 +7,7 @@ set scheme s2color8
 
 use "${temp}/temp1.dta", clear
 
-keep if syear == 2018
+keep if syear == 2018 & exclusion_hh == 0
 
 sum mblq mieter_wkblq eigen_blq eigen_wkblq  [w=hhrf]
 
@@ -15,9 +15,11 @@ gen mblq_initial = mblq
 gen eigenblq_initial = eigen_blq
 
 gen miet_wblq_initial = mieter_wkblq
-gen eig_wblq_initial = eigen_wkblq
+gen eig_wblq_initial = eigen_wkblq_2018
 
 gen hhnet_initial = hgi1hinc
+
+merge 1:1 hid syear using "/Users/kgoebler/Desktop/Miete und Energie Projekt/Vom DIW/Miete und Energie/Miete und Energie/Temp/temp2.dta", keepus(region) keep(3) nogen 
 
 save "${temp}/temp2.dta", replace 
 

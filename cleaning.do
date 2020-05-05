@@ -65,6 +65,29 @@ forval t = 1984 / 2018{
 duplicates drop hid if syear == `t', force
 }
 
+
+merge 1:m hid syear using "${data}/pgen.dta", keep(1 3) nogen keepus(pid pgemplst pglfs pgstib)
+
+bys syear hid: gen n = _n
+
+bys syear hid: egen n_hh = max(n) 
+drop n
+
+gen exclusion = (inlist(pgstib, 10,11,12,13)) if !missing(pgstib)
+
+bys syear hid: egen exclusion_n = total(exclusion) if !missing(exclusion)
+
+gen exclusion_hh = (exclusion_n== n_hh) if !missing(exclusion_n) & !missing(n_hh)
+
+drop n n_hh exclusion exclusion_n pid
+
+forval t = 1984 / 2018{
+duplicates drop hid if syear == `t', force
+}
+
+
+
+
 *** make population restrictions: ***
 
 * this will drop Refugee samples and Heimbewohner
@@ -322,6 +345,7 @@ gen eigen_energieblq = (heizkosten + stromkosten) / hgi1hinc * 100 if owner == 1
 
 * Gesamte Wohnkosten BLQ
 gen eigen_wkblq = (zinshoehe + nebenkosten + heizkosten + stromkosten) / hgi1hinc * 100 if owner == 1 & belastet == 1 & hgi1hinc > 0 & !missing(hgi1hinc)
+gen eigen_wkblq_2018 = (zinshoehe + nebenkosten + heizkosten + stromkosten + grundsteuer) / hgi1hinc * 100 if owner == 1 & belastet == 1 & hgi1hinc > 0 & !missing(hgi1hinc)
 
 
 

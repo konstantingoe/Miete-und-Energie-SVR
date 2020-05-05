@@ -5,6 +5,7 @@ version 15
 set memory 500m
 set varabbrev on
 
+/*
 
 * DIW 
 if c(username) == "kgoebler" {
@@ -18,12 +19,12 @@ if c(username) == "kgoebler" {
 
 }
 
-/*
+*/
+
 * homeoffice
 
 global data "/Users/kgoebler/Desktop/SOEP_2018/stata/"
 global out "/Users/kgoebler/Desktop/Miete und Energie Projekt/Out/"
-global scripts "/Users/kgoebler/Desktop/Miete und Energie Projekt/Scripts/"
+global scripts "/Users/kgoebler/Miete-und-Energie-SVR"
 global temp "/Users/kgoebler/Desktop/Miete und Energie Projekt/temp/"
 global graphs "/Users/kgoebler/Desktop/Miete und Energie Projekt/graphs/"
-*/
