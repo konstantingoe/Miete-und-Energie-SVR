@@ -383,13 +383,13 @@ replace hhtyp = 4 if inlist(hgtyp1hh, 4,5,6)
 
 label var hhtyp "HH Typen" 
 #delim ; 
-label def hhinc_group 
+label def hhtyp 
 1 "1 Pers. HH [1]" 
 2 "Alleinerz. HH [2]" 
 3 "Paar HH ohne K. [3]" 
 4 "Paar HH mit K. [4]", replace; 
 #delim cr 
-label values hhinc_group hhinc_group
+label values hhtyp hhtyp
 
 
 *** regional size

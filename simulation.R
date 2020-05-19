@@ -94,38 +94,44 @@ wohnk.ges_nor_eigunbel <- sapply(7:ncol(wohnk.df), function(c) weighted.mean(fil
 #Bruttokalt plot datensatz
 plot.df1 <- as.data.frame(c(wohnk_bruttok.gesamt,wohnk_bruttok.gesamt_mieter,wohnk_bruttok.gesamt_eigbel, wohnk_bruttok.gesamt_eigunbel))
 names(plot.df1)[1] <- "wohnk"
-plot.df1$Population <- as.factor(c(rep("gesamte Population",length(seq)),rep("Mieter",length(seq)),rep("Eigentümer \n (belastet)",length(seq)), rep("Eigentümer \n (nicht belastet)",length(seq))))
+plot.df1$Haushaltstyp <- as.factor(c(rep("gesamte Population",length(seq)),rep("Mieter",length(seq)),rep("Eigentümer \n (belastet)",length(seq)), rep("Eigentümer \n (nicht belastet)",length(seq))))
+plot.df1$Haushaltstyp <- factor(plot.df1$Haushaltstyp, levels = c("Mieter", "gesamte Population", "Eigentümer \n (belastet)", "Eigentümer \n (nicht belastet)"))
 plot.df1$seq <- rep(-1*seq,4)
 
 #gesamte Wohnkosten-Plot Datensatz
 plot.df2 <- as.data.frame(c(wohnk.gesamt,wohnk.gesamt_mieter,wohnk.gesamt_eigbel, wohnk.gesamt_eigunbel))
 names(plot.df2)[1] <- "wohnk"
-plot.df2$Population <- as.factor(c(rep("gesamte Population",length(seq)),rep("Mieter",length(seq)),rep("Eigentümer \n (belastet)",length(seq)), rep("Eigentümer \n (nicht belastet)",length(seq))))
+plot.df2$Haushaltstyp <- as.factor(c(rep("gesamte Population",length(seq)),rep("Mieter",length(seq)),rep("Eigentümer \n (belastet)",length(seq)), rep("Eigentümer \n (nicht belastet)",length(seq))))
+plot.df2$Haushaltstyp <- factor(plot.df2$Haushaltstyp, levels = c("Mieter", "gesamte Population", "Eigentümer \n (belastet)", "Eigentümer \n (nicht belastet)"))
 plot.df2$seq <- rep(-1*seq,4)
 
 #gesamte Wohnkosten-Plot Datensatz ohne HH mit Rücklagen
 plot.df3 <- as.data.frame(c(wohnk.ges_nor,wohnk.ges_nor_mieter,wohnk.ges_nor_eigbel, wohnk.ges_nor_eigunbel))
 names(plot.df3)[1] <- "wohnk"
-plot.df3$Population <- as.factor(c(rep("gesamte Population",length(seq)),rep("Mieter",length(seq)),rep("Eigentümer \n (belastet)",length(seq)), rep("Eigentümer \n (nicht belastet)",length(seq))))
+plot.df3$Haushaltstyp <- as.factor(c(rep("gesamte Population",length(seq)),rep("Mieter",length(seq)),rep("Eigentümer \n (belastet)",length(seq)), rep("Eigentümer \n (nicht belastet)",length(seq))))
+plot.df3$Haushaltstyp <- factor(plot.df3$Haushaltstyp, levels = c("Mieter", "gesamte Population", "Eigentümer \n (belastet)", "Eigentümer \n (nicht belastet)"))
 plot.df3$seq <- rep(-1*seq,4)
 
 
 #gesamte Wohnkosten-Plot Datensatz Großstadt
 plot.df4 <- as.data.frame(c(wohnk.city,wohnk.city_mieter,wohnk.city_eigbel, wohnk.city_eigunbel))
 names(plot.df4)[1] <- "wohnk"
-plot.df4$Population <- as.factor(c(rep("gesamte Population",length(seq)),rep("Mieter",length(seq)),rep("Eigentümer \n (belastet)",length(seq)), rep("Eigentümer \n (nicht belastet)",length(seq))))
+plot.df4$Haushaltstyp <- as.factor(c(rep("gesamte Population",length(seq)),rep("Mieter",length(seq)),rep("Eigentümer \n (belastet)",length(seq)), rep("Eigentümer \n (nicht belastet)",length(seq))))
+plot.df4$Haushaltstyp <- factor(plot.df4$Haushaltstyp, levels = c("Mieter", "gesamte Population", "Eigentümer \n (belastet)", "Eigentümer \n (nicht belastet)"))
 plot.df4$seq <- rep(-1*seq,4)
 
 #gesamte Wohnkosten-Plot Datensatz Land
 plot.df5 <- as.data.frame(c(wohnk.rural,wohnk.rural_mieter,wohnk.rural_eigbel, wohnk.rural_eigunbel))
 names(plot.df5)[1] <- "wohnk"
-plot.df5$Population <- as.factor(c(rep("gesamte Population",length(seq)),rep("Mieter",length(seq)),rep("Eigentümer \n (belastet)",length(seq)), rep("Eigentümer \n (nicht belastet)",length(seq))))
+plot.df5$Haushaltstyp <- as.factor(c(rep("gesamte Population",length(seq)),rep("Mieter",length(seq)),rep("Eigentümer \n (belastet)",length(seq)), rep("Eigentümer \n (nicht belastet)",length(seq))))
+plot.df5$Haushaltstyp <- factor(plot.df5$Haushaltstyp, levels = c("Mieter", "gesamte Population", "Eigentümer \n (belastet)", "Eigentümer \n (nicht belastet)"))
 plot.df5$seq <- rep(-1*seq,4)
 
-col <- c("#307397", "#30A0A6", "#A6A6A6", "#4BCBE2")
+col <- c("#4BCBE2", "#A6A6A6",  "#30A0A6", "#307397")
 
 ggplot(plot.df1, aes(x = seq, y = wohnk))+
-  geom_line(aes(color = Population), size = 2)+
+  geom_segment(aes(x=0,xend=-500,y=40,yend=40), linetype= 2, inherit.aes = FALSE, alpha = .5, color = "#ff2a26", size = .35) +
+  geom_line(aes(color = Haushaltstyp), size = 2)+
   xlab("Euro weniger pro Monat") +
   scale_x_reverse() +
   ylab("Wohnkostenbelastungsquote (bruttokalt) in %") +
@@ -134,14 +140,13 @@ ggplot(plot.df1, aes(x = seq, y = wohnk))+
   scale_colour_manual(values=col) +
   theme(plot.title = element_text(hjust = 0.5)) 
 
-
 ggsave("wohnblq_bruttokalt_siumu.png")
 
 
-
 #### gesamte Wohnkosten (hier präferiert)
-ggplot(plot.df2, aes(x = seq, y = wohnk))+
-  geom_line(aes(color = Population), size = 2)+
+ggplot(plot.df2, aes(x = seq, y = wohnk)) +
+  geom_segment(aes(x=0,xend=-500,y=40,yend=40), linetype= 2, inherit.aes = FALSE, alpha = .2, color = "#ff2a26", size = .35) +
+  geom_line(aes(color = Haushaltstyp), size = 2) +
   xlab("Euro weniger pro Monat") +
   scale_x_reverse() +
   ylab("Wohnkostenbelastungsquote in %") +
@@ -155,7 +160,8 @@ ggsave("wohnblq_gesamt_simu.png")
 
 #### gesamte Wohnkosten (hier präferiert)
 ggplot(plot.df3, aes(x = seq, y = wohnk))+
-  geom_line(aes(color = Population), size = 2)+
+  geom_segment(aes(x=0,xend=-500,y=40,yend=40), linetype= 2, inherit.aes = FALSE, alpha = .2, color = "#ff2a26", size = .35) +
+  geom_line(aes(color = Haushaltstyp), size = 2)+
   xlab("Euro weniger pro Monat") +
   scale_x_reverse() +
   ylab("Wohnkostenbelastungsquote in %") +
@@ -171,31 +177,41 @@ ggsave("wohnblq_gesamt_notrueck.png")
 
 #### gesamte Wohnkosten (hier präferiert)
 city <- ggplot(plot.df4, aes(x = seq, y = wohnk))+
-  geom_line(aes(color = Population), size = 2)+
+  geom_segment(aes(x=0,xend=-500,y=40,yend=40), linetype= 2, inherit.aes = FALSE, alpha = .2, color = "#ff2a26", size = .35) +
+  geom_line(aes(color = Haushaltstyp), size = 2)+
   xlab("Euro weniger pro Monat") +
   scale_x_reverse() +
   ylab("Wohnkostenbelastungsquote in %") +
   #ggtitle("Haushalt befindet sich in einer Großstadt") +
   theme_minimal() +
-  scale_colour_manual(values=col) +
+  scale_colour_manual(values=col) 
   #theme(plot.title = element_text(hjust = 0.5)) +
-  theme(legend.position = "none") 
+  #theme(legend.position = "none") 
 
 
 #ggsave("wohnblq_city.png")
 
 #### gesamte Wohnkosten (hier präferiert)
 rural <- ggplot(plot.df5, aes(x = seq, y = wohnk))+
-  geom_line(aes(color = Population), size = 2)+
+  geom_segment(aes(x=0,xend=-500,y=40,yend=40), linetype= 2, inherit.aes = FALSE, alpha = .2, color = "#ff2a26", size = .35) +
+  geom_line(aes(color = Haushaltstyp), size = 2)+
   xlab("Euro weniger pro Monat") +
   scale_x_reverse() +
   ylab("Wohnkostenbelastungsquote in %") +
   #ggtitle("Haushalt befindet sich auf dem Land") +
   theme_minimal() +
   scale_colour_manual(values=col) 
+  #theme(legend.position = "none") 
   #theme(plot.title = element_text(hjust = 0.5)) 
 
-plot_grid(city,rural, labels=c(">500.000 Einwohner", "<500.000 Einwohner"), hjust=-0.1, align="hv", rel_widths = c(1, 1.5), ncol = 2, nrow = 1)
+# legend
+legend <- get_legend(
+  # create some space to the left of the legend
+  rural + theme(legend.box.margin = ggplot2::margin(0, 0, 0, 12))
+)
+prow <- plot_grid(city + theme(legend.position="none"),rural + theme(legend.position="none"), labels=c(">500.000 Einwohner", "<500.000 Einwohner"), hjust=-0.1, align="vh", nrow = 1)
+
+plot_grid(prow, legend, rel_widths = c(2, .4))
 
 ggsave("wohnblq_city_rural.png")
 
