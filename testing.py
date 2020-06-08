@@ -1,4 +1,6 @@
+
 import pandas as pd
+
 
 
 from matplotlib import pyplot as plt
@@ -50,4 +52,5 @@ plt.xlabel("year")
 plt.ylabel("Population Growth")
 plt.show()
 
-x = "Jan ist spitze"
+x = "Pauli ist spitze"
+
